@@ -84,6 +84,8 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/pass_32.png"))); // NOI18N
         jLabel3.setText("Password");
 
+        txtUsername.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+
         btnHuy.setBackground(new java.awt.Color(102, 102, 255));
         btnHuy.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         btnHuy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/cancel_32.png"))); // NOI18N
@@ -94,6 +96,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        txtPass.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         txtPass.setText("jPasswordField1");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

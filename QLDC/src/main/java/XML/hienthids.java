@@ -53,6 +53,7 @@ public class hienthids {
                 tk.setQuyen(Integer.parseInt(liquyen.item(i).getTextContent()));
                 ds.add(tk);
             }
+            
             System.out.println("Danh sách tài khoản taikhoan2.xml: ");
             for(taikhoan tk : ds) {
                 System.out.println(tk);
