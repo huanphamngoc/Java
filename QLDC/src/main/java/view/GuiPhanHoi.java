@@ -45,31 +45,19 @@ public class GuiPhanHoi extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        btnGuiKienNghi = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         txtSoNha = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtNoiDungKienNghi = new javax.swing.JTextArea();
-        txtThoiGianGuiKienNghi = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        txtThoiGianHienTai = new javax.swing.JButton();
+        btnGuiKienNghi = new javax.swing.JButton();
         btnHome = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLabel1.setText("Gửi kiến nghị");
-
-        btnGuiKienNghi.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
-        btnGuiKienNghi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ic_send_32.png"))); // NOI18N
-        btnGuiKienNghi.setText("Gửi");
-        btnGuiKienNghi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuiKienNghiActionPerformed(evt);
-            }
-        });
 
         txtSoNha.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
 
@@ -78,22 +66,18 @@ public class GuiPhanHoi extends javax.swing.JFrame {
         txtNoiDungKienNghi.setRows(5);
         jScrollPane1.setViewportView(txtNoiDungKienNghi);
 
-        txtThoiGianGuiKienNghi.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel2.setText("Số nhà");
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel3.setText("Nội dung");
 
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel4.setText("Thời gian gửi");
-
-        txtThoiGianHienTai.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        txtThoiGianHienTai.setText("Thời gian hiện tại");
-        txtThoiGianHienTai.addActionListener(new java.awt.event.ActionListener() {
+        btnGuiKienNghi.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        btnGuiKienNghi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ic_send_32.png"))); // NOI18N
+        btnGuiKienNghi.setText("Gửi");
+        btnGuiKienNghi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtThoiGianHienTaiActionPerformed(evt);
+                btnGuiKienNghiActionPerformed(evt);
             }
         });
 
@@ -105,16 +89,16 @@ public class GuiPhanHoi extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addGap(75, 75, 75)
+                    .addComponent(jLabel3))
+                .addGap(118, 118, 118)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtThoiGianGuiKienNghi)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 495, Short.MAX_VALUE)
                     .addComponent(txtSoNha))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtThoiGianHienTai)
-                .addContainerGap())
+                .addContainerGap(227, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnGuiKienNghi, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(308, 308, 308))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,12 +111,9 @@ public class GuiPhanHoi extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(24, 24, 24)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtThoiGianGuiKienNghi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtThoiGianHienTai))
-                .addGap(52, 52, 52))
+                .addGap(42, 42, 42)
+                .addComponent(btnGuiKienNghi)
+                .addGap(79, 79, 79))
         );
 
         btnHome.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
@@ -153,16 +134,11 @@ public class GuiPhanHoi extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(203, 203, 203))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(401, 401, 401)
-                        .addComponent(btnGuiKienNghi, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addComponent(btnHome)
-                        .addGap(309, 309, 309)
-                        .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(56, 56, 56)
+                .addComponent(btnHome)
+                .addGap(309, 309, 309)
+                .addComponent(jLabel1)
+                .addContainerGap(489, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,19 +149,11 @@ public class GuiPhanHoi extends javax.swing.JFrame {
                     .addComponent(btnHome))
                 .addGap(35, 35, 35)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnGuiKienNghi)
                 .addGap(31, 31, 31))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtThoiGianHienTaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtThoiGianHienTaiActionPerformed
-        // TODO add your handling code here:
-        LocalDateTime currentTime = LocalDateTime.now();
-        txtThoiGianGuiKienNghi.setText(""+currentTime);
-    }//GEN-LAST:event_txtThoiGianHienTaiActionPerformed
 
     private void btnGuiKienNghiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuiKienNghiActionPerformed
         // TODO add your handling code here:
@@ -193,7 +161,8 @@ public class GuiPhanHoi extends javax.swing.JFrame {
         conn = ConnectJDBC.connect();
         int sonha = Integer.parseInt(txtSoNha.getText());
         String content = txtNoiDungKienNghi.getText();
-        String currentTime = txtThoiGianGuiKienNghi.getText();
+        
+        String currentTime = LocalDateTime.now()+"";
 
         String query = "INSERT INTO phanhoi(IDPhanHoi, NoiDungPhanHoi, ThoiGianTao, SoNha) " + "VALUES (null,?, ?, ?)";
         PreparedStatement pstm = null;
@@ -262,12 +231,9 @@ public class GuiPhanHoi extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea txtNoiDungKienNghi;
     private javax.swing.JTextField txtSoNha;
-    private javax.swing.JTextField txtThoiGianGuiKienNghi;
-    private javax.swing.JButton txtThoiGianHienTai;
     // End of variables declaration//GEN-END:variables
 }

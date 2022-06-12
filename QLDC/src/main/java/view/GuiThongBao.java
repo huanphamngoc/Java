@@ -54,10 +54,7 @@ public class GuiThongBao extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtContent = new javax.swing.JTextArea();
-        jLabel5 = new javax.swing.JLabel();
-        txtThoiGianGui = new javax.swing.JTextField();
         btnGuiThongBao = new javax.swing.JButton();
-        btnCurrent = new javax.swing.JButton();
 
         jLabel3.setText("jLabel3");
 
@@ -99,29 +96,11 @@ public class GuiThongBao extends javax.swing.JFrame {
         txtContent.setRows(5);
         jScrollPane2.setViewportView(txtContent);
 
-        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel5.setText("Thời gian gửi");
-
-        txtThoiGianGui.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        txtThoiGianGui.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtThoiGianGuiActionPerformed(evt);
-            }
-        });
-
         btnGuiThongBao.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         btnGuiThongBao.setText("Gửi thông báo");
         btnGuiThongBao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuiThongBaoActionPerformed(evt);
-            }
-        });
-
-        btnCurrent.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        btnCurrent.setText("Thời gian hiện tại");
-        btnCurrent.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCurrentActionPerformed(evt);
             }
         });
 
@@ -140,21 +119,16 @@ public class GuiThongBao extends javax.swing.JFrame {
                         .addGap(164, 164, 164)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel5))
-                        .addGap(26, 26, 26)
+                            .addComponent(jLabel2))
+                        .addGap(69, 69, 69)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cboLuaChon, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(327, 327, 327)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtThoiGianGui, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(38, 38, 38)
-                                .addComponent(btnCurrent))
-                            .addComponent(btnGuiThongBao))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(171, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnGuiThongBao)
+                .addGap(369, 369, 369))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,14 +145,9 @@ public class GuiThongBao extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtThoiGianGui, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCurrent))
-                .addGap(39, 39, 39)
+                .addGap(35, 35, 35)
                 .addComponent(btnGuiThongBao)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(94, Short.MAX_VALUE))
         );
 
         pack();
@@ -195,16 +164,12 @@ public class GuiThongBao extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnHomeActionPerformed
 
-    private void txtThoiGianGuiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtThoiGianGuiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtThoiGianGuiActionPerformed
-
     private void btnGuiThongBaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuiThongBaoActionPerformed
         // TODO add your handling code here:
       Connection conn = null;
         conn = ConnectJDBC.connect();
         String content = txtContent.getText();
-        String currentTime = txtThoiGianGui.getText();
+        String currentTime = LocalDateTime.now()+"";
 
         String query = "INSERT INTO thongbao(IDThongBao, NoiDungThongBao, ThoiGianGui) " + "VALUES (null,?, ?)";
         PreparedStatement pstm = null;
@@ -223,12 +188,6 @@ public class GuiThongBao extends javax.swing.JFrame {
                 e.printStackTrace();
             }
     }//GEN-LAST:event_btnGuiThongBaoActionPerformed
-
-    private void btnCurrentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCurrentActionPerformed
-        // TODO add your handling code here:
-        LocalDateTime currentTime = LocalDateTime.now();
-        txtThoiGianGui.setText(""+currentTime);
-    }//GEN-LAST:event_btnCurrentActionPerformed
 
     /**
      * @param args the command line arguments
@@ -266,7 +225,6 @@ public class GuiThongBao extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCurrent;
     private javax.swing.JButton btnGuiThongBao;
     private javax.swing.JButton btnHome;
     private javax.swing.JComboBox<String> cboLuaChon;
@@ -274,12 +232,10 @@ public class GuiThongBao extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea txtContent;
-    private javax.swing.JTextField txtThoiGianGui;
     // End of variables declaration//GEN-END:variables
 }
