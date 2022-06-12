@@ -47,7 +47,7 @@ public class TaiKhoanMoi extends javax.swing.JFrame {
     DocumentBuilderFactory dbf;
     DocumentBuilder db;
     Document doc;
-    String filename = "E:\\QLSV\\src\\main\\java\\XML\\taikhoan2.xml";
+    String filename = "E:\\QLDCJAVA\\java\\QLDC\\src\\main\\java\\XML\\taikhoan2.xml";
 
     
      /**
@@ -63,7 +63,7 @@ public class TaiKhoanMoi extends javax.swing.JFrame {
             txtXacNhan.setText("");
             dbf = DocumentBuilderFactory.newInstance();
             db = dbf.newDocumentBuilder();
-            doc = db.parse("E:\\QLSV\\src\\main\\java\\XML\\taikhoan2.xml");
+            doc = db.parse("E:\\QLDCJAVA\\java\\QLDC\\src\\main\\java\\XML\\taikhoan2.xml");
         } catch (ParserConfigurationException ex) {
             Logger.getLogger(TaiKhoanMoi.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SAXException ex) {
@@ -393,7 +393,7 @@ public class TaiKhoanMoi extends javax.swing.JFrame {
             tr.setOutputProperty(OutputKeys.INDENT, "yes");
             tr.setOutputProperty("{https:xml.apache.org/xslt}indent-amount", "3");
             DOMSource nguon = new DOMSource(doc);
-            StreamResult dich = new StreamResult("E:\\QLSV\\src\\main\\java\\XML\\taikhoan2.xml");
+            StreamResult dich = new StreamResult("E:\\QLDCJAVA\\java\\QLDC\\src\\main\\java\\XML\\taikhoan2.xml");
             tr.transform(nguon, dich);
             System.out.println("Da ghi xong");
         } catch (TransformerConfigurationException ex) {

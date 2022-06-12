@@ -78,9 +78,13 @@ public class XemThongBao extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblThongBao = new javax.swing.JTable();
         btnHome = new javax.swing.JButton();
-        btnXemTB = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLabel1.setText("Xem thông báo");
@@ -107,15 +111,6 @@ public class XemThongBao extends javax.swing.JFrame {
             }
         });
 
-        btnXemTB.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        btnXemTB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/viewdetails_vista_3354.png"))); // NOI18N
-        btnXemTB.setText("Xem");
-        btnXemTB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXemTBActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -125,9 +120,7 @@ public class XemThongBao extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnXemTB, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnHome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnHome)
                         .addGap(218, 218, 218)
                         .addComponent(jLabel1)
                         .addGap(0, 380, Short.MAX_VALUE)))
@@ -140,9 +133,7 @@ public class XemThongBao extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnHome)
                     .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                .addComponent(btnXemTB)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41))
         );
@@ -150,7 +141,14 @@ public class XemThongBao extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnXemTBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemTBActionPerformed
+    private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
+        // TODO add your handling code here:
+        UIMain uim = new UIMain(Tentk, Sonha);
+        uim.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnHomeActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         Connection conn = null;
         conn = ConnectJDBC.connect();
@@ -182,15 +180,7 @@ public class XemThongBao extends javax.swing.JFrame {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
-    }//GEN-LAST:event_btnXemTBActionPerformed
-
-    private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
-        // TODO add your handling code here:
-        UIMain uim = new UIMain(Tentk, Sonha);
-        uim.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnHomeActionPerformed
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -229,7 +219,6 @@ public class XemThongBao extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHome;
-    private javax.swing.JButton btnXemTB;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblThongBao;

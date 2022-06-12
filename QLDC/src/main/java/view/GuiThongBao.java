@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import ConnectDB.ConnectJDBC;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -187,6 +188,8 @@ public class GuiThongBao extends javax.swing.JFrame {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+        JOptionPane.showMessageDialog(this, "Gửi thông báo thành công");
+        txtContent.setText("");
     }//GEN-LAST:event_btnGuiThongBaoActionPerformed
 
     /**

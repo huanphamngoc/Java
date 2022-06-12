@@ -1,39 +1,47 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <taikhoans>
+        
     
     <hodan idhodan="5">
+                
         
         <taikhoan>phamhoa110</taikhoan>
+                
         
         <matkhau>12345</matkhau>
+                
         
         <quyen>0</quyen>
-        
-    </hodan>
+                
     
-    <hodan idhodan="6">
-        
-        <taikhoan>hoapham</taikhoan>
-        
-        <matkhau>12345</matkhau>
-        
-        <quyen>0</quyen>
-        
     </hodan>
+        
+    
+    
     
     <hodan idhodan="7">
+                
         
         <taikhoan>phamhoa110</taikhoan>
+                
         
         <matkhau>0974</matkhau>
+                
         
         <quyen>0</quyen>
-        
+                
+    
     </hodan>
+        
     
     <hodan idhodan="2">
+                
         <taikhoan>Huan123</taikhoan>
+                
         <matkhau>12345</matkhau>
+                
         <quyen>1</quyen>
+            
     </hodan>
+    
 </taikhoans>

@@ -54,13 +54,17 @@ public class UIXemThongTin extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         btnHome = new javax.swing.JButton();
-        btnXemChiTiet = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         lblSoNha = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblChiTietGiaDinh = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLabel1.setText("THÔNG TIN GIA ĐÌNH");
@@ -71,15 +75,6 @@ public class UIXemThongTin extends javax.swing.JFrame {
         btnHome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHomeActionPerformed(evt);
-            }
-        });
-
-        btnXemChiTiet.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        btnXemChiTiet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/viewdetails_vista_3354.png"))); // NOI18N
-        btnXemChiTiet.setText("Xem");
-        btnXemChiTiet.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXemChiTietActionPerformed(evt);
             }
         });
 
@@ -111,10 +106,8 @@ public class UIXemThongTin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 925, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(btnXemChiTiet, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(6, 6, 6)
+                        .addComponent(jLabel2)
+                        .addGap(66, 66, 66)
                         .addComponent(lblSoNha))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnHome)
@@ -133,9 +126,7 @@ public class UIXemThongTin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(lblSoNha))
-                .addGap(28, 28, 28)
-                .addComponent(btnXemChiTiet)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(80, 80, 80)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -162,7 +153,14 @@ public class UIXemThongTin extends javax.swing.JFrame {
         }
         model.fireTableDataChanged();
     }
-    private void btnXemChiTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemChiTietActionPerformed
+    private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
+        // TODO add your handling code here:
+        UIMain uim = new UIMain(Tentk,Sonha);
+        uim.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnHomeActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         int sonha = Integer.parseInt(lblSoNha.getText());
          Connection conn = null;
@@ -201,14 +199,7 @@ public class UIXemThongTin extends javax.swing.JFrame {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }//GEN-LAST:event_btnXemChiTietActionPerformed
-
-    private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
-        // TODO add your handling code here:
-        UIMain uim = new UIMain(Tentk,Sonha);
-        uim.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnHomeActionPerformed
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -247,7 +238,6 @@ public class UIXemThongTin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHome;
-    private javax.swing.JButton btnXemChiTiet;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

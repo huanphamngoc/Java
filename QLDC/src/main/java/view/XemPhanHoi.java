@@ -50,9 +50,13 @@ public class XemPhanHoi extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPhanHoi = new javax.swing.JTable();
         btnHome = new javax.swing.JButton();
-        btnXemPhanHoi = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLabel1.setText("Ý kiến người dân");
@@ -79,35 +83,20 @@ public class XemPhanHoi extends javax.swing.JFrame {
             }
         });
 
-        btnXemPhanHoi.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        btnXemPhanHoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/viewdetails_vista_3354.png"))); // NOI18N
-        btnXemPhanHoi.setText("Xem toàn bộ phản hồi");
-        btnXemPhanHoi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXemPhanHoiActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(btnHome)
                         .addGap(122, 122, 122)
                         .addComponent(jLabel1)
-                        .addGap(0, 255, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1)))
+                        .addGap(0, 255, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnXemPhanHoi)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,9 +105,7 @@ public class XemPhanHoi extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnHome)
                     .addComponent(jLabel1))
-                .addGap(54, 54, 54)
-                .addComponent(btnXemPhanHoi)
-                .addGap(32, 32, 32)
+                .addGap(127, 127, 127)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(151, 151, 151))
         );
@@ -153,7 +140,7 @@ public class XemPhanHoi extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnHomeActionPerformed
 
-    private void btnXemPhanHoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemPhanHoiActionPerformed
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         Connection conn = null;
         conn = ConnectJDBC.connect();
@@ -189,8 +176,7 @@ public class XemPhanHoi extends javax.swing.JFrame {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
-    }//GEN-LAST:event_btnXemPhanHoiActionPerformed
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -229,7 +215,6 @@ public class XemPhanHoi extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHome;
-    private javax.swing.JButton btnXemPhanHoi;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import  java.time.LocalDateTime;
 import ConnectDB.ConnectJDBC;
+import javax.swing.JOptionPane;
 import static view.UIXemThongTin.Sonha;
 import static view.UIXemThongTin.Tentk;
 /**
@@ -180,6 +181,8 @@ public class GuiPhanHoi extends javax.swing.JFrame {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+        JOptionPane.showMessageDialog(this, "Gửi phản hồi thành công");
+        txtNoiDungKienNghi.setText("");
     }//GEN-LAST:event_btnGuiKienNghiActionPerformed
 
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed

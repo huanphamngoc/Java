@@ -44,7 +44,7 @@ public class QuanLyTaiKhoan extends javax.swing.JFrame {
     DocumentBuilderFactory dbf;
     DocumentBuilder db;
     Document doc;
-    String filename = "E:\\QLSV\\src\\main\\java\\XML\\taikhoan2.xml";
+    String filename = "E:\\QLDCJAVA\\java\\QLDC\\src\\main\\java\\XML\\taikhoan2.xml";
     DefaultTableModel model = new DefaultTableModel();
     
     
@@ -59,7 +59,7 @@ public class QuanLyTaiKhoan extends javax.swing.JFrame {
             setTitle("Quản lý tài khoản");
             dbf = DocumentBuilderFactory.newInstance();
             db = dbf.newDocumentBuilder();
-            doc = db.parse("E:\\QLSV\\src\\main\\java\\XML\\taikhoan2.xml");
+            doc = db.parse("E:\\QLDCJAVA\\java\\QLDC\\src\\main\\java\\XML\\taikhoan2.xml");
             Hienthi();
         } catch (ParserConfigurationException ex) {
             Logger.getLogger(TaiKhoanMoi.class.getName()).log(Level.SEVERE, null, ex);
@@ -254,7 +254,7 @@ public class QuanLyTaiKhoan extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, "Vua tao form");
+//        JOptionPane.showMessageDialog(this, "Vua tao form");
     }//GEN-LAST:event_formWindowOpened
 
     private void Ghifile() {
@@ -265,7 +265,7 @@ public class QuanLyTaiKhoan extends javax.swing.JFrame {
             tr.setOutputProperty(OutputKeys.INDENT, "yes");
             tr.setOutputProperty("{https:xml.apache.org/xslt}indent-amount", "3");
             DOMSource nguon = new DOMSource(doc);
-            StreamResult dich = new StreamResult("E:\\QLSV\\src\\main\\java\\XML\\taikhoan2.xml");
+            StreamResult dich = new StreamResult("E:\\QLDCJAVA\\java\\QLDC\\src\\main\\java\\XML\\taikhoan2.xml");
             tr.transform(nguon, dich);
             System.out.println("Da ghi xong");
         } catch (TransformerConfigurationException ex) {
