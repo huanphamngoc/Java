@@ -242,14 +242,11 @@ public class TaiKhoanMoi extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(22, 22, 22))
         );
 
@@ -272,7 +269,7 @@ public class TaiKhoanMoi extends javax.swing.JFrame {
         try {
             //Tạo đối tượng Statement
             stm = conn.createStatement();
-
+            
             //Thực thi truy vấn và trả về đối tượng ResultSet
             ResultSet rs = stm.executeQuery(query);
           
@@ -335,26 +332,9 @@ public class TaiKhoanMoi extends javax.swing.JFrame {
         
          Connection conn = null;
         conn = ConnectJDBC.connect();
-        String query = "INSERT INTO dadangky(SoNha) " +
-                "VALUES (?)";
         PreparedStatement pstm = null;
- 
-    
-    try {
-            pstm = conn.prepareStatement(query);
-            int item = Integer.parseInt(cboSoNha.getSelectedItem().toString());
-            pstm.setInt(1,item );
-            
-            int row = pstm.executeUpdate();
-            if(row != 0){
-                System.out.println("Thêm thành công " + row);
-            }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-    query = "INSERT INTO taikhoan(IDTaiKhoan, TenTaiKhoan, MatKhau, Quyen, SoNha) " +
+    String query = "INSERT INTO taikhoan(IDTaiKhoan, TenTaiKhoan, MatKhau, Quyen, SoNha) " +
                 "VALUES (null, ?, ?, ?, ?)";
  
     

@@ -34,13 +34,14 @@ import javax.xml.xpath.XPathExpressionException;
 import XML.taikhoan;
 import ConnectDB.ConnectJDBC;
 import javax.swing.JOptionPane;
+import model.Person;
 
 /**
  *
  * @author Admin
  */
 public class QuanLyTaiKhoan extends javax.swing.JFrame {
-
+    ArrayList<taikhoan> li = new ArrayList<taikhoan>();
     DocumentBuilderFactory dbf;
     DocumentBuilder db;
     Document doc;
@@ -73,7 +74,7 @@ public class QuanLyTaiKhoan extends javax.swing.JFrame {
         NodeList litk = doc.getElementsByTagName("taikhoan");
         NodeList limk = doc.getElementsByTagName("matkhau");
         NodeList liq = doc.getElementsByTagName("quyen");
-        ArrayList<taikhoan> li = new ArrayList<taikhoan>();
+        
         
         NodeList liidhd = doc.getElementsByTagName("hodan");
         for (int i = 0; i < liq.getLength(); i++) {
@@ -88,10 +89,10 @@ public class QuanLyTaiKhoan extends javax.swing.JFrame {
 //        System.out.println("Danh sach la: " + li);
         model.setColumnCount(0);
         model.setRowCount(0);
-        model.addColumn("Tai khoan");
-        model.addColumn("Mat khau");
-        model.addColumn("quyen");
-        model.addColumn("So nha");
+        model.addColumn("Tài khoản");
+        model.addColumn("Mật khẩu");
+        model.addColumn("Quyền");
+        model.addColumn("Số nhà");
         for(taikhoan tk : li) {
             Vector v = new Vector();
             v.add(tk.getTaikhoan());
@@ -120,6 +121,11 @@ public class QuanLyTaiKhoan extends javax.swing.JFrame {
         tblTaiKhoan = new javax.swing.JTable();
         btnHome = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        btnSua = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        txtTaiKhoan = new javax.swing.JTextField();
+        txtMatKhau = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -134,7 +140,7 @@ public class QuanLyTaiKhoan extends javax.swing.JFrame {
 
         btnThemMoi.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         btnThemMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/add_32.png"))); // NOI18N
-        btnThemMoi.setText("Thêm mới");
+        btnThemMoi.setText("Thêm");
         btnThemMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThemMoiActionPerformed(evt);
@@ -158,9 +164,14 @@ public class QuanLyTaiKhoan extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Tai khoan", "Mat khau", "quyen", "So nha"
+                "Tài khoản", "Mật khẩu", "Quyền", "Số nhà"
             }
         ));
+        tblTaiKhoan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblTaiKhoanMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblTaiKhoan);
 
         btnHome.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
@@ -174,6 +185,25 @@ public class QuanLyTaiKhoan extends javax.swing.JFrame {
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/add_acc_256.png"))); // NOI18N
 
+        btnSua.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/create_32.png"))); // NOI18N
+        btnSua.setText("Sửa");
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel2.setText("Tài khoản");
+
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel3.setText("Mật khẩu");
+
+        txtTaiKhoan.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+
+        txtMatKhau.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -183,16 +213,30 @@ public class QuanLyTaiKhoan extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton4)
                     .addComponent(btnHome))
-                .addGap(136, 136, 136)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2))
+                                .addGap(55, 55, 55)
+                                .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnThemMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(btnThemMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1))
-                .addContainerGap(369, Short.MAX_VALUE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGap(74, 74, 74)
+                            .addComponent(jLabel1))))
+                .addContainerGap(263, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,16 +245,28 @@ public class QuanLyTaiKhoan extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnHome)
                     .addComponent(jLabel1))
-                .addGap(84, 84, 84)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtMatKhau, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnThemMoi)
-                            .addComponent(btnXoa))
-                        .addGap(39, 39, 39)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(64, Short.MAX_VALUE))
+                        .addComponent(btnThemMoi)
+                        .addGap(64, 64, 64)
+                        .addComponent(btnSua)
+                        .addGap(69, 69, 69)
+                        .addComponent(btnXoa)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27))))
         );
 
         pack();
@@ -222,7 +278,6 @@ public class QuanLyTaiKhoan extends javax.swing.JFrame {
         TaiKhoanMoi taiKhoanMoi = new TaiKhoanMoi();
         taiKhoanMoi.setVisible(true);
         this.dispose();
-        
         
     }//GEN-LAST:event_btnThemMoiActionPerformed
 
@@ -245,6 +300,7 @@ public class QuanLyTaiKhoan extends javax.swing.JFrame {
             Node parent = taikhoan.getParentNode();
             parent.removeChild(taikhoan);
             Ghifile();
+            li.clear();
             Hienthi();
         } catch (XPathExpressionException ex) {
             Logger.getLogger(QuanLyTaiKhoan.class.getName()).log(Level.SEVERE, null, ex);
@@ -256,6 +312,26 @@ public class QuanLyTaiKhoan extends javax.swing.JFrame {
         // TODO add your handling code here:
 //        JOptionPane.showMessageDialog(this, "Vua tao form");
     }//GEN-LAST:event_formWindowOpened
+
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnSuaActionPerformed
+
+    private void tblTaiKhoanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTaiKhoanMouseClicked
+        // TODO add your handling code here:
+         int selectedRow = tblTaiKhoan.getSelectedRow();
+        if(selectedRow >= 0){
+            String id = (String) tblTaiKhoan.getValueAt(selectedRow, 0);
+            for (taikhoan tk : li) {
+                if(id.equals(tk.getTaikhoan())){
+                    txtTaiKhoan.setText(tk.getTaikhoan());
+                    txtMatKhau.setText(tk.getMatkhau());
+                    break;
+            }
+        }
+        }
+    }//GEN-LAST:event_tblTaiKhoanMouseClicked
 
     private void Ghifile() {
         try {
@@ -313,11 +389,16 @@ public class QuanLyTaiKhoan extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHome;
+    private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThemMoi;
     private javax.swing.JButton btnXoa;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblTaiKhoan;
+    private javax.swing.JTextField txtMatKhau;
+    private javax.swing.JTextField txtTaiKhoan;
     // End of variables declaration//GEN-END:variables
 }
