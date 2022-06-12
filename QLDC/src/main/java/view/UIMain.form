@@ -88,8 +88,8 @@
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="btnXemThongTinChiTiet" max="32767" attributes="0"/>
                       <Component id="btnXemThongBao" alignment="0" max="32767" attributes="0"/>
-                      <Component id="btnGuiKienNghi" max="32767" attributes="0"/>
                       <Component id="btnDangXuat" max="32767" attributes="0"/>
+                      <Component id="btnGuiKienNghi" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="0" pref="48" max="32767" attributes="0"/>
               </Group>
@@ -98,15 +98,13 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                   <Component id="btnXemThongTinChiTiet" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
+                  <EmptySpace pref="99" max="32767" attributes="0"/>
                   <Component id="btnXemThongBao" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
                   <Component id="btnGuiKienNghi" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="68" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
                   <Component id="btnDangXuat" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

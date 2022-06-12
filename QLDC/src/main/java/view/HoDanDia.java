@@ -69,11 +69,15 @@ public class HoDanDia extends javax.swing.JDialog {
         jPanel3 = new javax.swing.JPanel();
         btnXoa = new javax.swing.JButton();
         btnThem = new javax.swing.JButton();
-        btnHien = new javax.swing.JButton();
         btnXemChiTiet = new javax.swing.JButton();
         btnHome = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         tblHoDan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -184,15 +188,6 @@ public class HoDanDia extends javax.swing.JDialog {
             }
         });
 
-        btnHien.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        btnHien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/create_32.png"))); // NOI18N
-        btnHien.setText("Hiện");
-        btnHien.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHienActionPerformed(evt);
-            }
-        });
-
         btnXemChiTiet.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         btnXemChiTiet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/see_eye_visible_icon_187826.png"))); // NOI18N
         btnXemChiTiet.setText("Xem chi tiết");
@@ -207,9 +202,7 @@ public class HoDanDia extends javax.swing.JDialog {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnThem, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
-                    .addComponent(btnHien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnXemChiTiet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -223,10 +216,8 @@ public class HoDanDia extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnXoa)
                     .addComponent(btnThem))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnHien)
-                    .addComponent(btnXemChiTiet))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                .addComponent(btnXemChiTiet)
                 .addContainerGap())
         );
 
@@ -304,13 +295,12 @@ public class HoDanDia extends javax.swing.JDialog {
      
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-        int id, sotv;
+    int id = 0, sotv;
     Connection conn = null;
         conn = ConnectJDBC.connect();
     int sonha1 = Integer.parseInt(txtSoNha.getText());
     
-    
-    String query = "SELECT * FROM hodan";
+     String query = "SELECT * FROM hodan";
         Statement stm = null;
         try {
             //Tạo đối tượng Statement
@@ -325,9 +315,12 @@ public class HoDanDia extends javax.swing.JDialog {
                
                 id = rs.getInt("SoNha");
                 sotv = rs.getInt("SoNguoi");
-                if(sonha1 == id)
+               
+                if(sonha1 == id){
                     JOptionPane.showMessageDialog(this, "Số nhà đã tồn tại");
-                
+                    break;
+                }
+                    
                 HoDan hoDan = new HoDan();
                 hoDan.setSoNha(id);
                 hoDan.setSoTV(sotv);
@@ -338,12 +331,32 @@ public class HoDanDia extends javax.swing.JDialog {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-            
+        
         query = "INSERT INTO hodan(SoNha, SoNguoi) " +
                 "VALUES (?, ?)";
         PreparedStatement pstm = null;
  
+    try {
+            pstm = conn.prepareStatement(query);
+            
+            pstm.setInt(1, sonha1);
+            pstm.setInt(2, 0);
+             
+            int row = pstm.executeUpdate();
+            if(row != 0){
+                System.out.println("Thêm thành công " + row);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     
+     
+            
+        query = "INSERT INTO hodan(SoNha, SoNguoi) " +
+                "VALUES (?, ?)";
+        
+ 
     try {
             pstm = conn.prepareStatement(query);
 
@@ -359,16 +372,8 @@ public class HoDanDia extends javax.swing.JDialog {
             e.printStackTrace();
         }
     
-       
-    }//GEN-LAST:event_btnThemActionPerformed
-
-    private void btnHienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienActionPerformed
-        // TODO add your handling code here:
-        Connection conn = null;
-        conn = ConnectJDBC.connect();
-      String query = "SELECT * FROM hodan";
-      Statement stm = null;
-
+    query = "SELECT * FROM hodan";
+        
         try {
             //Tạo đối tượng Statement
             stm = conn.createStatement();
@@ -380,20 +385,22 @@ public class HoDanDia extends javax.swing.JDialog {
             //Duyệt kết quả trả về
             while (rs.next()){  //Di chuyển con trỏ xuống bản ghi kế tiếp
                
-                int id = rs.getInt("SoNha");
-                int sotv = rs.getInt("SoNguoi");
+                id = rs.getInt("SoNha");
+                sotv = rs.getInt("SoNguoi");
+               
+                    
                 HoDan hoDan = new HoDan();
                 hoDan.setSoNha(id);
                 hoDan.setSoTV(sotv);
                 listHoDans.add(hoDan);
-               
-                fillTable();
-               
+
+               fillTable();
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-      query = "SELECT COUNT(SoNha) AS TongSoHoDan FROM hodan";
+        
+    query = "SELECT COUNT(SoNha) AS TongSoHoDan FROM hodan";
         try {
             stm = conn.createStatement();
             ResultSet rs = stm.executeQuery(query);
@@ -404,7 +411,8 @@ public class HoDanDia extends javax.swing.JDialog {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }//GEN-LAST:event_btnHienActionPerformed
+       
+    }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnXemChiTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemChiTietActionPerformed
         // TODO add your handling code here:
@@ -482,7 +490,64 @@ public class HoDanDia extends javax.swing.JDialog {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        
+        query = "SELECT COUNT(SoNha) AS TongSoHoDan FROM hodan";
+        Statement stm = null;
+        try {
+            stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(query);
+            while(rs.next()){
+                int tongSoHoDan = rs.getInt("TongSoHoDan");
+                txtTongSoHoDan.setText(""+tongSoHoDan);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        Connection conn = null;
+        conn = ConnectJDBC.connect();
+      String query = "SELECT * FROM hodan";
+      Statement stm = null;
+
+        try {
+            //Tạo đối tượng Statement
+            stm = conn.createStatement();
+
+            //Thực thi truy vấn và trả về đối tượng ResultSet
+            ResultSet rs = stm.executeQuery(query);
+           
+           listHoDans.clear();
+            //Duyệt kết quả trả về
+            while (rs.next()){  //Di chuyển con trỏ xuống bản ghi kế tiếp
+               
+                int id = rs.getInt("SoNha");
+                int sotv = rs.getInt("SoNguoi");
+                HoDan hoDan = new HoDan();
+                hoDan.setSoNha(id);
+                hoDan.setSoTV(sotv);
+                listHoDans.add(hoDan);
+               
+                fillTable();
+               
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        query = "SELECT COUNT(SoNha) AS TongSoHoDan FROM hodan";
+        try {
+            stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(query);
+            while(rs.next()){
+                int tongSoHoDan = rs.getInt("TongSoHoDan");
+                txtTongSoHoDan.setText(""+tongSoHoDan);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_formWindowOpened
     
     
     /**
@@ -529,7 +594,6 @@ public class HoDanDia extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnHien;
     private javax.swing.JButton btnHome;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnXemChiTiet;

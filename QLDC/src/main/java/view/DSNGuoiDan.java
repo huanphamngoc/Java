@@ -19,6 +19,8 @@ import javax.swing.table.DefaultTableModel;
 import model.HoDan;
 
 import ConnectDB.ConnectJDBC;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 /**
  *
  * @author Admin
@@ -34,6 +36,7 @@ public class DSNGuoiDan extends javax.swing.JFrame {
         initComponents();
         initTable();
         fillTable();
+        initMajor();
         txtTongSoNguoi.setEnabled(false);
         txtID.setEnabled(false);
         setTitle("Danh sách người dân");
@@ -55,7 +58,6 @@ public class DSNGuoiDan extends javax.swing.JFrame {
         btnSua = new javax.swing.JButton();
         btnXoa = new javax.swing.JButton();
         btnHome = new javax.swing.JButton();
-        btnHien = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -65,13 +67,18 @@ public class DSNGuoiDan extends javax.swing.JFrame {
         txtNamSinh = new javax.swing.JTextField();
         txtNgheNghiep = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        txtSoNha = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         txtID = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtTongSoNguoi = new javax.swing.JTextField();
+        cboSoNha = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/users_32.png"))); // NOI18N
@@ -131,15 +138,6 @@ public class DSNGuoiDan extends javax.swing.JFrame {
             }
         });
 
-        btnHien.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        btnHien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/viewdetails_vista_3354.png"))); // NOI18N
-        btnHien.setText("Hiện");
-        btnHien.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHienActionPerformed(evt);
-            }
-        });
-
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel2.setText("Họ tên");
 
@@ -163,8 +161,6 @@ public class DSNGuoiDan extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel6.setText("Số nhà");
 
-        txtSoNha.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel7.setText("ID");
 
@@ -174,6 +170,14 @@ public class DSNGuoiDan extends javax.swing.JFrame {
         jLabel8.setText("Tổng số người");
 
         txtTongSoNguoi.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+
+        cboSoNha.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        cboSoNha.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboSoNha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboSoNhaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -190,11 +194,9 @@ public class DSNGuoiDan extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnThem)
-                                .addGap(57, 57, 57)
-                                .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnHien, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(51, 51, 51)
+                                .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(149, 149, 149)
                                 .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 702, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(51, 51, 51)
@@ -213,8 +215,8 @@ public class DSNGuoiDan extends javax.swing.JFrame {
                             .addComponent(txtTuoi, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtHoTen)
                             .addComponent(txtID, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtSoNha, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTongSoNguoi))))
+                            .addComponent(txtTongSoNguoi)
+                            .addComponent(cboSoNha, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -227,7 +229,6 @@ public class DSNGuoiDan extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnXoa)
-                    .addComponent(btnHien)
                     .addComponent(btnSua)
                     .addComponent(btnThem)
                     .addComponent(jLabel8)
@@ -244,29 +245,63 @@ public class DSNGuoiDan extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(txtHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(40, 40, 40)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(txtTuoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(31, 31, 31)
+                        .addGap(37, 37, 37)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtTuoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addGap(45, 45, 45)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(txtNamSinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(48, 48, 48)
+                        .addGap(34, 34, 34)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(txtNgheNghiep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(38, 38, 38)
+                        .addGap(41, 41, 41)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtSoNha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
-                        .addGap(6, 6, 6)))
+                            .addComponent(jLabel6)
+                            .addComponent(cboSoNha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(9, 9, 9)))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void initMajor(){
+        List<String> item = new ArrayList<>();
+         Connection conn = null;
+        conn = ConnectJDBC.connect();
+        String query = "SELECT SoNha FROM hodan";
+        Statement stm = null;
+        try {
+            //Tạo đối tượng Statement
+            stm = conn.createStatement();
+
+            //Thực thi truy vấn và trả về đối tượng ResultSet
+            ResultSet rs = stm.executeQuery(query);
+          
+            //Duyệt kết quả trả về
+            while (rs.next()){  //Di chuyển con trỏ xuống bản ghi kế tiếp
+                int selectedItem = rs.getInt("SoNha");
+                String duochon = ""+ selectedItem;
+                item.add(duochon);
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        String majors[] = new String[item.size()];
+        
+        for(int i = 0;i<item.size();i++){
+//            System.out.println("Item"+item.get(i));
+            majors[i] = item.get(i);
+        }
+       
+        DefaultComboBoxModel <String> comboBoxModel = new DefaultComboBoxModel<>(majors);
+        cboSoNha.setModel(comboBoxModel);
+        
+    }
     private void initTable(){
         String[] colums = new String[]{
             "ID", "Họ tên", "Tuổi", "Năm sinh", "Nghề nghiệp", "Số nhà"
@@ -293,65 +328,12 @@ public class DSNGuoiDan extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnHomeActionPerformed
 
-    private void btnHienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienActionPerformed
-        // TODO add your handling code here:
-        Connection conn = null;
-        conn = ConnectJDBC.connect();
-      
-       String query = "SELECT * FROM nguoi";
-        Statement stm = null;
-        try {
-            //Tạo đối tượng Statement
-            stm = conn.createStatement();
-
-            //Thực thi truy vấn và trả về đối tượng ResultSet
-            ResultSet rs = stm.executeQuery(query);
-           
-           listPersons.clear();
-            //Duyệt kết quả trả về
-            while (rs.next()){  //Di chuyển con trỏ xuống bản ghi kế tiếp
-                int sonha = rs.getInt("SoNha");
-                int id = rs.getInt("ID");
-                String hoten = rs.getString("HoTen");
-                int tuoi = rs.getInt("Tuoi");
-                String namsinh = rs.getString("NamSinh");
-                String nghenghiep = rs.getString("NgheNghiep");
-                
-                Person person = new Person();
-                person.setId(id);
-                person.setHoten(hoten);
-                person.setTuoi(tuoi);
-                person.setNamsinh(namsinh);
-                person.setNghenghiep(nghenghiep);
-                person.setSonha(sonha);
-                listPersons.add(person);
-               
-                fillTable();
-               
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-      query = "SELECT COUNT(ID) AS TongSoNguoi FROM nguoi";
-        try {
-            stm = conn.createStatement();
-            ResultSet rs = stm.executeQuery(query);
-            while(rs.next()){
-                int tongSoNguoi = rs.getInt("TongSoNguoi");
-                txtTongSoNguoi.setText(""+tongSoNguoi);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        
-    }//GEN-LAST:event_btnHienActionPerformed
-
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
         Connection conn = null;
         conn = ConnectJDBC.connect();
       String kq = "";
-    int sonha = Integer.parseInt(txtSoNha.getText());
+    int sonha = Integer.parseInt(cboSoNha.getSelectedItem().toString());
     String hoten = txtHoTen.getText();
     int tuoi = Integer.parseInt(txtTuoi.getText());
     String namsinh = txtNamSinh.getText();
@@ -383,7 +365,7 @@ public class DSNGuoiDan extends javax.swing.JFrame {
         }
         
         query = "SELECT * FROM nguoi";
-        System.out.println(query);
+        
         Statement stm = null;
         try {
             //Tạo đối tượng Statement
@@ -425,6 +407,18 @@ public class DSNGuoiDan extends javax.swing.JFrame {
                 e.printStackTrace();
             }
        }
+       
+       query = "SELECT COUNT(ID) AS TongSoNguoi FROM nguoi";
+        try {
+            stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(query);
+            while(rs.next()){
+                int tongSoNguoi = rs.getInt("TongSoNguoi");
+                txtTongSoNguoi.setText(""+tongSoNguoi);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void tblAllMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAllMouseClicked
@@ -439,7 +433,7 @@ public class DSNGuoiDan extends javax.swing.JFrame {
                     txtTuoi.setText(""+person.getTuoi());
                     txtNamSinh.setText(person.getNamsinh());
                     txtNgheNghiep.setText(person.getNghenghiep());
-                    txtSoNha.setText(""+person.getSonha());
+                    cboSoNha.setSelectedItem(""+person.getSonha());
                     break;
             }
         }
@@ -452,7 +446,7 @@ public class DSNGuoiDan extends javax.swing.JFrame {
         String hoten = txtHoTen.getText();
         String namsinh = txtNamSinh.getText();
         String nghenghiep = txtNgheNghiep.getText();
-        int sonha = Integer.parseInt(txtSoNha.getText());
+        int sonha = Integer.parseInt(cboSoNha.getSelectedItem().toString());
         int tuoi = Integer.parseInt(txtTuoi.getText());
         int choice = JOptionPane.showConfirmDialog(this, "Co chac chan sua ko?", "Noti", JOptionPane.YES_NO_OPTION);
         if(choice == JOptionPane.NO_OPTION){
@@ -501,7 +495,7 @@ public class DSNGuoiDan extends javax.swing.JFrame {
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
         int id = Integer.parseInt(txtID.getText());
-        int sonha = Integer.parseInt(txtSoNha.getText());
+        int sonha = Integer.parseInt(cboSoNha.getSelectedItem().toString());
         String kq = "";
         int choice = JOptionPane.showConfirmDialog(this, "Co chac chan xoa ko?", "Noti", JOptionPane.YES_NO_OPTION);
         if(choice == JOptionPane.NO_OPTION){
@@ -545,7 +539,77 @@ public class DSNGuoiDan extends javax.swing.JFrame {
                 e.printStackTrace();
             }
        }
+        
+        query = "SELECT COUNT(ID) AS TongSoNguoi FROM nguoi";
+        Statement stm = null;
+        try {
+            stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(query);
+            while(rs.next()){
+                int tongSoNguoi = rs.getInt("TongSoNguoi");
+                txtTongSoNguoi.setText(""+tongSoNguoi);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        Connection conn = null;
+        conn = ConnectJDBC.connect();
+      
+       String query = "SELECT * FROM nguoi";
+        Statement stm = null;
+        try {
+            //Tạo đối tượng Statement
+            stm = conn.createStatement();
+
+            //Thực thi truy vấn và trả về đối tượng ResultSet
+            ResultSet rs = stm.executeQuery(query);
+           
+           listPersons.clear();
+            //Duyệt kết quả trả về
+            while (rs.next()){  //Di chuyển con trỏ xuống bản ghi kế tiếp
+                int sonha = rs.getInt("SoNha");
+                int id = rs.getInt("ID");
+                String hoten = rs.getString("HoTen");
+                int tuoi = rs.getInt("Tuoi");
+                String namsinh = rs.getString("NamSinh");
+                String nghenghiep = rs.getString("NgheNghiep");
+                
+                Person person = new Person();
+                person.setId(id);
+                person.setHoten(hoten);
+                person.setTuoi(tuoi);
+                person.setNamsinh(namsinh);
+                person.setNghenghiep(nghenghiep);
+                person.setSonha(sonha);
+                listPersons.add(person);
+               
+                fillTable();
+               
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        query = "SELECT COUNT(ID) AS TongSoNguoi FROM nguoi";
+        try {
+            stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(query);
+            while(rs.next()){
+                int tongSoNguoi = rs.getInt("TongSoNguoi");
+                txtTongSoNguoi.setText(""+tongSoNguoi);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_formWindowOpened
+
+    private void cboSoNhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboSoNhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboSoNhaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -583,11 +647,11 @@ public class DSNGuoiDan extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnHien;
     private javax.swing.JButton btnHome;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnXoa;
+    private javax.swing.JComboBox<String> cboSoNha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -602,7 +666,6 @@ public class DSNGuoiDan extends javax.swing.JFrame {
     private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtNamSinh;
     private javax.swing.JTextField txtNgheNghiep;
-    private javax.swing.JTextField txtSoNha;
     private javax.swing.JTextField txtTongSoNguoi;
     private javax.swing.JTextField txtTuoi;
     // End of variables declaration//GEN-END:variables
