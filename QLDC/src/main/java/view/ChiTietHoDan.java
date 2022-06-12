@@ -89,7 +89,6 @@ public class ChiTietHoDan extends javax.swing.JFrame {
         btnSua = new javax.swing.JButton();
         btnThem = new javax.swing.JButton();
         btnXoa = new javax.swing.JButton();
-        btnHien = new javax.swing.JButton();
         btnHome = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -103,6 +102,11 @@ public class ChiTietHoDan extends javax.swing.JFrame {
         txtID = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLabel1.setText("CHI TIẾT HỘ DÂN");
@@ -197,24 +201,13 @@ public class ChiTietHoDan extends javax.swing.JFrame {
             }
         });
 
-        btnHien.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        btnHien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/viewdetails_vista_3354.png"))); // NOI18N
-        btnHien.setText("Hiển thị");
-        btnHien.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHienActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnHien, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
-                    .addComponent(btnThem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnXoa, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
@@ -229,9 +222,7 @@ public class ChiTietHoDan extends javax.swing.JFrame {
                     .addComponent(btnThem)
                     .addComponent(btnXoa))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnHien)
-                    .addComponent(btnSua))
+                .addComponent(btnSua)
                 .addContainerGap())
         );
 
@@ -423,6 +414,25 @@ public class ChiTietHoDan extends javax.swing.JFrame {
                 e.printStackTrace();
             }
        }
+       
+       query = "SELECT COUNT(nguoi.SoNha) AS Number FROM nguoi WHERE nguoi.SoNha = "+sonha+"";
+        
+        try {
+            //Tạo đối tượng Statement
+            stm = conn.createStatement();
+            
+            //Thực thi truy vấn và trả về đối tượng ResultSet
+            ResultSet rs = stm.executeQuery(query);
+          
+            //Duyệt kết quả trả về
+           while (rs.next()){  //Di chuyển con trỏ xuống bản ghi kế tiếp
+                
+                txtChiTietSoThanhVien.setText(""+rs.getInt("Number"));
+                //listPersons.clear();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }                                       
 
     private void btnHienActionPerformed(java.awt.event.ActionEvent evt) {                                        
@@ -593,55 +603,27 @@ public class ChiTietHoDan extends javax.swing.JFrame {
                 e.printStackTrace();
             }
        }
-    }//GEN-LAST:event_btnXoaActionPerformed
-/*
-    private void btnHienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienActionPerformed
-        // TODO add your handling code here:
-        int sonha1 = Integer.parseInt(txtChiTietSoNha.getText());
-         Connection conn = null;
-      try {
-          Class.forName("com.mysql.jdbc.Driver");
-         conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/qldancu?useSSL=false", "root", "");
-         System.out.println("Connection is successful !!!!!");
-      } catch(Exception e) {
-         e.printStackTrace();
-      }
-      
-       String query = "SELECT * FROM nguoi WHERE SoNha = "+sonha1+"";
-        System.out.println(query);
+        
+        query = "SELECT COUNT(nguoi.SoNha) AS Number FROM nguoi WHERE nguoi.SoNha = "+sonha+"";
         Statement stm = null;
         try {
             //Tạo đối tượng Statement
             stm = conn.createStatement();
-
+            
             //Thực thi truy vấn và trả về đối tượng ResultSet
             ResultSet rs = stm.executeQuery(query);
-           
+          
             //Duyệt kết quả trả về
-            while (rs.next()){  //Di chuyển con trỏ xuống bản ghi kế tiếp
-               
-                int id = rs.getInt("ID");
-                String hoten = rs.getString("HoTen");
-                int tuoi = rs.getInt("Tuoi");
-                String namsinh = rs.getString("NamSinh");
-                String nghenghiep = rs.getString("NgheNghiep");
+           while (rs.next()){  //Di chuyển con trỏ xuống bản ghi kế tiếp
                 
-                System.out.println(id +" "+ hoten +" "+ tuoi +" "+ namsinh +""+ nghenghiep);
-                Person person = new Person();
-                person.setId(id);
-                person.setHoten(hoten);
-                person.setTuoi(tuoi);
-                person.setNamsinh(namsinh);
-                person.setNghenghiep(nghenghiep);
-                listPersons.add(person);
-                fillTable();
-               
+                txtChiTietSoThanhVien.setText(""+rs.getInt("Number"));
+                //listPersons.clear();
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }//GEN-LAST:event_btnHienActionPerformed
-*/
+    }//GEN-LAST:event_btnXoaActionPerformed
+/**/
     private void tblPersonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPersonMouseClicked
         // TODO add your handling code here:
         int selectedRow = tblPerson.getSelectedRow();
@@ -659,6 +641,65 @@ public class ChiTietHoDan extends javax.swing.JFrame {
         }
         }
     }//GEN-LAST:event_tblPersonMouseClicked
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        int sonha1 = Integer.parseInt(txtChiTietSoNha.getText());
+         Connection conn = null;
+        conn = ConnectJDBC.connect();
+      
+       String query = "SELECT * FROM nguoi WHERE SoNha = "+sonha1+"";
+        
+        Statement stm = null;
+        try {
+            //Tạo đối tượng Statement
+            stm = conn.createStatement();
+
+            //Thực thi truy vấn và trả về đối tượng ResultSet
+            ResultSet rs = stm.executeQuery(query);
+           listPersons.clear();
+            //Duyệt kết quả trả về
+            while (rs.next()){  //Di chuyển con trỏ xuống bản ghi kế tiếp
+               
+                int id = rs.getInt("ID");
+                String hoten = rs.getString("HoTen");
+                int tuoi = rs.getInt("Tuoi");
+                String namsinh = rs.getString("NamSinh");
+                String nghenghiep = rs.getString("NgheNghiep");
+                
+                Person person = new Person();
+                person.setId(id);
+                person.setHoten(hoten);
+                person.setTuoi(tuoi);
+                person.setNamsinh(namsinh);
+                person.setNghenghiep(nghenghiep);
+                listPersons.add(person);
+                fillTable();
+               
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+         query = "SELECT COUNT(nguoi.SoNha) AS Number FROM nguoi WHERE nguoi.SoNha = "+sonha1+"";
+        
+        try {
+            //Tạo đối tượng Statement
+            stm = conn.createStatement();
+            
+            //Thực thi truy vấn và trả về đối tượng ResultSet
+            ResultSet rs = stm.executeQuery(query);
+          
+            //Duyệt kết quả trả về
+           while (rs.next()){  //Di chuyển con trỏ xuống bản ghi kế tiếp
+                
+                txtChiTietSoThanhVien.setText(""+rs.getInt("Number"));
+                //listPersons.clear();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -696,7 +737,6 @@ public class ChiTietHoDan extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnHien;
     private javax.swing.JButton btnHome;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
