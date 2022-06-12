@@ -10,22 +10,28 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import  java.time.LocalDateTime;
 import ConnectDB.ConnectJDBC;
+import static view.UIXemThongTin.Sonha;
+import static view.UIXemThongTin.Tentk;
 /**
  *
  * @author Admin
  */
-public class GuiKienNghi extends javax.swing.JFrame {
+public class GuiPhanHoi extends javax.swing.JFrame {
 
     /**
      * Creates new form GuiKienNghi
      */
-    public GuiKienNghi(String sonha) {
+    static String Tentk;
+    static String Sonha;
+    public GuiPhanHoi(String sonha, String tentk) {
         initComponents();
+        Tentk = tentk;
+        Sonha = sonha;
         txtSoNha.setEnabled(false);
         txtSoNha.setText(sonha);
     }
 
-    private GuiKienNghi() {
+    private GuiPhanHoi() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -209,8 +215,7 @@ public class GuiKienNghi extends javax.swing.JFrame {
 
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
         // TODO add your handling code here:
-        String soNhaUI = txtSoNha.getText();
-         UIMain uim = new UIMain();
+        UIMain uim = new UIMain(Tentk,Sonha);
         uim.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnHomeActionPerformed
@@ -232,20 +237,21 @@ public class GuiKienNghi extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GuiKienNghi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GuiPhanHoi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GuiKienNghi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GuiPhanHoi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GuiKienNghi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GuiPhanHoi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GuiKienNghi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GuiPhanHoi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GuiKienNghi().setVisible(true);
+                new GuiPhanHoi().setVisible(true);
             }
         });
     }

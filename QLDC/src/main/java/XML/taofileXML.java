@@ -54,7 +54,7 @@ public class taofileXML {
             tr.setOutputProperty(OutputKeys.INDENT, "yes");
             tr.setOutputProperty("{https:xml.apache.org/xslt}indent-amount", "2");
             DOMSource nguon = new DOMSource(doc);
-            StreamResult dich = new StreamResult("E:\\Ky 6\\Java\\BTL\\QLSV\\src\\main\\java\\XML\\taikhoan2.xml");
+            StreamResult dich = new StreamResult("E:\\QLDCJAVA\\java\\QLDC\\src\\main\\java\\XML\\taikhoan2.xml");
             tr.transform(nguon, dich);
             System.out.println("Da ghi xong");
             

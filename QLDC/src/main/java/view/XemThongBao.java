@@ -26,14 +26,22 @@ public class XemThongBao extends javax.swing.JFrame {
     ThongBaoDAO thongBaoDAO = new ThongBaoDAO();
     List<ThongBao> listThongBao = thongBaoDAO.getAllTB();
     DefaultTableModel model = new DefaultTableModel();
+    static String Tentk;
+    static String Sonha;
     /**
      * Creates new form XemThongBao
      */
-    public XemThongBao() {
+    public XemThongBao(String sonha, String tentk) {
         
         initComponents();
+        Tentk = tentk;
+        Sonha = sonha;
         initTable();
         fillTable();
+    }
+
+    private XemThongBao() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -179,7 +187,7 @@ public class XemThongBao extends javax.swing.JFrame {
 
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
         // TODO add your handling code here:
-        UIMain uim = new UIMain();
+        UIMain uim = new UIMain(Tentk, Sonha);
         uim.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnHomeActionPerformed

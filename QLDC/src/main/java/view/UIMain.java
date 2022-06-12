@@ -81,7 +81,7 @@ public class UIMain extends javax.swing.JFrame {
 
         btnGuiKienNghi.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         btnGuiKienNghi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ic_send_32.png"))); // NOI18N
-        btnGuiKienNghi.setText("Gửi kiến nghị");
+        btnGuiKienNghi.setText("Gửi phản hồi");
         btnGuiKienNghi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuiKienNghiActionPerformed(evt);
@@ -178,7 +178,7 @@ public class UIMain extends javax.swing.JFrame {
 
     private void btnGuiKienNghiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuiKienNghiActionPerformed
         // TODO add your handling code here:
-        GuiKienNghi guiKienNghi = new GuiKienNghi(lblSoNha.getText());
+        GuiPhanHoi guiKienNghi = new GuiPhanHoi(lblSoNha.getText(), lblTenTK.getText());
         guiKienNghi.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnGuiKienNghiActionPerformed
@@ -192,7 +192,7 @@ public class UIMain extends javax.swing.JFrame {
 
     private void btnXemThongBaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemThongBaoActionPerformed
         // TODO add your handling code here:
-        XemThongBao xemThongBao = new XemThongBao();
+        XemThongBao xemThongBao = new XemThongBao(lblSoNha.getText(), lblTenTK.getText());
         xemThongBao.setVisible(true);
         this.dispose();
         

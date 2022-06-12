@@ -35,7 +35,7 @@ public class hienthids {
             //doan code trong nay de doc du lieu tu file ra thanh 1 list de co the lam viec void cac ptu cua list
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
-            Document doc = db.parse("E:\\Ky 6\\Java\\BTL\\QLSV\\src\\main\\java\\XML\\taikhoan2.xml");
+            Document doc = db.parse("E:\\QLDCJAVA\\java\\QLDC\\src\\main\\java\\XML\\taikhoan2.xml");
         
             Element taikhoans = doc.getDocumentElement();
             NodeList litaikhoan = taikhoans.getElementsByTagName("taikhoan");

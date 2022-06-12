@@ -148,7 +148,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/icons/ic_send_32.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="G&#x1eed;i ki&#x1ebf;n ngh&#x1ecb;"/>
+            <Property name="text" type="java.lang.String" value="G&#x1eed;i ph&#x1ea3;n h&#x1ed3;i"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGuiKienNghiActionPerformed"/>
