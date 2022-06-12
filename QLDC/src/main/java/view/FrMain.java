@@ -163,8 +163,8 @@ public class FrMain extends javax.swing.JFrame {
 
     private void btnQLHoDanCuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLHoDanCuActionPerformed
         // TODO add your handling code here:
-        HoDanDia hoDanDia = new HoDanDia(this, rootPaneCheckingEnabled);
-        hoDanDia.setVisible(true);
+        frHoDan hodan  = new frHoDan();
+        hodan.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnQLHoDanCuActionPerformed
 

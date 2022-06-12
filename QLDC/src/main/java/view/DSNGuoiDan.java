@@ -460,6 +460,7 @@ public class DSNGuoiDan extends javax.swing.JFrame {
                 person.setTuoi(tuoi);
                 person.setNamsinh(namsinh);
                 person.setNghenghiep(nghenghiep);
+                person.setSonha(sonha);
                 break;
             }
         }

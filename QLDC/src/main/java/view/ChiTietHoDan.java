@@ -368,8 +368,6 @@ public class ChiTietHoDan extends javax.swing.JFrame {
             e.printStackTrace();
         }
         
-        
-    
         query = "SELECT * FROM nguoi WHERE SoNha = "+sonha+"";
         System.out.println(query);
         Statement stm = null;

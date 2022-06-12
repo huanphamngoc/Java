@@ -21,29 +21,23 @@ import ConnectDB.hodan_service;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import ConnectDB.ConnectJDBC;
-
 /**
  *
  * @author Admin
  */
-public class HoDanDia extends javax.swing.JDialog {
-    //hodan_service hdsv = new hodan_service();
+public class frHoDan extends javax.swing.JFrame {
     HoDanDAO dao = new HoDanDAO();
     ArrayList<HoDan> listHoDans = new ArrayList();
     Object rowData[];
     DefaultTableModel model = new DefaultTableModel();
     /**
-     * Creates new form HoDanDia
+     * Creates new form HoDan
      */
-    public HoDanDia(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public frHoDan() {
         initComponents();
         initTable();
         fillTable();
-        txtTongSoHoDan.setEnabled(false);
         txtSoTV.setEnabled(false);
-        txtSoTV.setText("0");
-        setTitle("Hộ dân cư");
     }
 
     /**
@@ -57,6 +51,10 @@ public class HoDanDia extends javax.swing.JDialog {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblHoDan = new javax.swing.JTable();
+        jPanel3 = new javax.swing.JPanel();
+        btnXoa = new javax.swing.JButton();
+        btnThem = new javax.swing.JButton();
+        btnXemChiTiet = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -66,13 +64,9 @@ public class HoDanDia extends javax.swing.JDialog {
         txtSoTV = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtTongSoHoDan = new javax.swing.JTextField();
-        jPanel3 = new javax.swing.JPanel();
-        btnXoa = new javax.swing.JButton();
-        btnThem = new javax.swing.JButton();
-        btnXemChiTiet = new javax.swing.JButton();
         btnHome = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -93,6 +87,61 @@ public class HoDanDia extends javax.swing.JDialog {
             }
         });
         jScrollPane1.setViewportView(tblHoDan);
+
+        jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        btnXoa.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/delete32.png"))); // NOI18N
+        btnXoa.setText("Xóa");
+        btnXoa.setToolTipText("");
+        btnXoa.setAlignmentY(0.2F);
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
+
+        btnThem.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/add_32.png"))); // NOI18N
+        btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
+
+        btnXemChiTiet.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        btnXemChiTiet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/see_eye_visible_icon_187826.png"))); // NOI18N
+        btnXemChiTiet.setText("Xem chi tiết");
+        btnXemChiTiet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXemChiTietActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnXemChiTiet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnXoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnXoa)
+                    .addComponent(btnThem))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                .addComponent(btnXemChiTiet)
+                .addContainerGap())
+        );
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/home_243_32.png"))); // NOI18N
@@ -166,61 +215,6 @@ public class HoDanDia extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        btnXoa.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/delete32.png"))); // NOI18N
-        btnXoa.setText("Xóa");
-        btnXoa.setToolTipText("");
-        btnXoa.setAlignmentY(0.2F);
-        btnXoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoaActionPerformed(evt);
-            }
-        });
-
-        btnThem.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/add_32.png"))); // NOI18N
-        btnThem.setText("Thêm");
-        btnThem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThemActionPerformed(evt);
-            }
-        });
-
-        btnXemChiTiet.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        btnXemChiTiet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/see_eye_visible_icon_187826.png"))); // NOI18N
-        btnXemChiTiet.setText("Xem chi tiết");
-        btnXemChiTiet.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXemChiTietActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnXemChiTiet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnXoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnXoa)
-                    .addComponent(btnThem))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
-                .addComponent(btnXemChiTiet)
-                .addContainerGap())
-        );
-
         btnHome.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/home_32.png"))); // NOI18N
         btnHome.setText("Home");
@@ -234,8 +228,8 @@ public class HoDanDia extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(192, 192, 192)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(105, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnHome)
@@ -246,7 +240,7 @@ public class HoDanDia extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 906, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(397, Short.MAX_VALUE))
+                .addGap(99, 99, 99))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -261,22 +255,15 @@ public class HoDanDia extends javax.swing.JDialog {
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(37, 37, 37)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public HoDan getModel(){
-        HoDan hodan = new HoDan(); 
-        hodan.setSoNha(Integer.parseInt(txtSoNha.getText()));
-        hodan.setSoTV(Integer.parseInt(txtSoTV.getText()));
-        return hodan;
-    }
-    
-     private void initTable(){
+    private void initTable(){
         String[] colums = new String[]{
-            "Số nhà", "Số thành viên"
+            "", "Số thành viên"
         };
         model.setColumnIdentifiers(colums);
         
@@ -292,168 +279,29 @@ public class HoDanDia extends javax.swing.JDialog {
         }
         model.fireTableDataChanged();
     }
-     
-    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        // TODO add your handling code here:
-    int id = 0, sotv;
-    Connection conn = null;
-        conn = ConnectJDBC.connect();
-    int sonha1 = Integer.parseInt(txtSoNha.getText());
-    
-     String query = "SELECT * FROM hodan";
-        Statement stm = null;
-        try {
-            //Tạo đối tượng Statement
-            stm = conn.createStatement();
-
-            //Thực thi truy vấn và trả về đối tượng ResultSet
-            ResultSet rs = stm.executeQuery(query);
-           
-           listHoDans.clear();
-            //Duyệt kết quả trả về
-            while (rs.next()){  //Di chuyển con trỏ xuống bản ghi kế tiếp
-               
-                id = rs.getInt("SoNha");
-                sotv = rs.getInt("SoNguoi");
-               
-                if(sonha1 == id){
-                    JOptionPane.showMessageDialog(this, "Số nhà đã tồn tại");
-                    break;
-                }
-                    
-                HoDan hoDan = new HoDan();
-                hoDan.setSoNha(id);
-                hoDan.setSoTV(sotv);
-                listHoDans.add(hoDan);
-
-               fillTable();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        
-        query = "INSERT INTO hodan(SoNha, SoNguoi) " +
-                "VALUES (?, ?)";
-        PreparedStatement pstm = null;
- 
-    try {
-            pstm = conn.prepareStatement(query);
-            
-            pstm.setInt(1, sonha1);
-            pstm.setInt(2, 0);
-             
-            int row = pstm.executeUpdate();
-            if(row != 0){
-                System.out.println("Thêm thành công " + row);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    
-     
-            
-        query = "INSERT INTO hodan(SoNha, SoNguoi) " +
-                "VALUES (?, ?)";
-        
- 
-    try {
-            pstm = conn.prepareStatement(query);
-
-            pstm.setInt(1, sonha1);
-            pstm.setInt(2, 0);
-            
-            int row = pstm.executeUpdate();
-            if(row != 0){
-                System.out.println("Thêm thành công " + row);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    
-    query = "SELECT * FROM hodan";
-        
-        try {
-            //Tạo đối tượng Statement
-            stm = conn.createStatement();
-
-            //Thực thi truy vấn và trả về đối tượng ResultSet
-            ResultSet rs = stm.executeQuery(query);
-           
-           listHoDans.clear();
-            //Duyệt kết quả trả về
-            while (rs.next()){  //Di chuyển con trỏ xuống bản ghi kế tiếp
-               
-                id = rs.getInt("SoNha");
-                sotv = rs.getInt("SoNguoi");
-               
-                    
-                HoDan hoDan = new HoDan();
-                hoDan.setSoNha(id);
-                hoDan.setSoTV(sotv);
-                listHoDans.add(hoDan);
-
-               fillTable();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        
-    query = "SELECT COUNT(SoNha) AS TongSoHoDan FROM hodan";
-        try {
-            stm = conn.createStatement();
-            ResultSet rs = stm.executeQuery(query);
-            while(rs.next()){
-                int tongSoHoDan = rs.getInt("TongSoHoDan");
-                txtTongSoHoDan.setText(""+tongSoHoDan);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-       
-    }//GEN-LAST:event_btnThemActionPerformed
-
-    private void btnXemChiTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemChiTietActionPerformed
-        // TODO add your handling code here:
-        ChiTietHoDan chiTietHoDan = new ChiTietHoDan(txtSoNha.getText(), txtSoTV.getText());
-        chiTietHoDan.setVisible(true);
-        chiTietHoDan.setLocationRelativeTo(null);
-        this.dispose();
-    }//GEN-LAST:event_btnXemChiTietActionPerformed
-
     private void tblHoDanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoDanMouseClicked
-        // TODO add your handling code here:                               
-       int selectedRow = tblHoDan.getSelectedRow();
+        // TODO add your handling code here:
+        int selectedRow = tblHoDan.getSelectedRow();
         if(selectedRow >= 0){
             int id = (int) tblHoDan.getValueAt(selectedRow, 0);
             for (HoDan hoDan : listHoDans) {
                 if(id == hoDan.getSoNha()){
                     txtSoNha.setText(""+id);
                     txtSoTV.setText(""+hoDan.getSoTV());
-                   
+
                     break;
+                }
             }
         }
-        }
-            
     }//GEN-LAST:event_tblHoDanMouseClicked
-
-    private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
-        // TODO add your handling code here:
-        FrMain frMain = new FrMain();
-        frMain.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnHomeActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
-     
-      
-//      HoDan delHoDan = new HoDan();
-//      delHoDan.setSoNha(Integer.parseInt(txtSoNha.getText()));
-//      delHoDan.setSoTV(Integer.parseInt(txtSoTV.getText()));
-       int choice = JOptionPane.showConfirmDialog(this, "Có chắc chắn xóa không ?", "Noti", JOptionPane.YES_NO_OPTION);
+
+        //      frHoDan delHoDan = new frHoDan();
+        //      delHoDan.setSoNha(Integer.parseInt(txtSoNha.getText()));
+        //      delHoDan.setSoTV(Integer.parseInt(txtSoTV.getText()));
+        int choice = JOptionPane.showConfirmDialog(this, "Có chắc chắn xóa không ?", "Noti", JOptionPane.YES_NO_OPTION);
         if(choice == JOptionPane.NO_OPTION){
             return;
         }
@@ -475,22 +323,18 @@ public class HoDanDia extends javax.swing.JDialog {
         PreparedStatement pstm = null;
         try {
             pstm = conn.prepareStatement(query);
-          
+
             pstm.setInt(1, deleHoDan.getSoNha());
-            //System.out.println(hoDan.getSoNha());
-            //System.out.println(hoDan.getSoNha());
             //Khi thực hiện các lệnh insert/update/delete sử dụng executeUpdate, nó sẽ trả về số hàng bị tác động
             int row = pstm.executeUpdate();
-            
-//            model.getDataVector().removeAllElements();
-//            model.fireTableDataChanged(); // notifies the JTable that the model has changed
+
             if(row != 0){
                 System.out.println("Xóa thành công " + row);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
+
         query = "SELECT COUNT(SoNha) AS TongSoHoDan FROM hodan";
         Statement stm = null;
         try {
@@ -505,9 +349,141 @@ public class HoDanDia extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnXoaActionPerformed
 
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        // TODO add your handling code here:
+        int id = 0, sotv;
+        Connection conn = null;
+        conn = ConnectJDBC.connect();
+        int sonha1 = Integer.parseInt(txtSoNha.getText());
+
+        String query = "SELECT * FROM hodan";
+        Statement stm = null;
+        try {
+            //Tạo đối tượng Statement
+            stm = conn.createStatement();
+
+            //Thực thi truy vấn và trả về đối tượng ResultSet
+            ResultSet rs = stm.executeQuery(query);
+
+            listHoDans.clear();
+            //Duyệt kết quả trả về
+            while (rs.next()){  //Di chuyển con trỏ xuống bản ghi kế tiếp
+
+                id = rs.getInt("SoNha");
+                sotv = rs.getInt("SoNguoi");
+
+                if(sonha1 == id){
+                    JOptionPane.showMessageDialog(this, "Số nhà đã tồn tại");
+                    break;
+                }
+
+                HoDan hoDan = new HoDan();
+                hoDan.setSoNha(id);
+                hoDan.setSoTV(sotv);
+                listHoDans.add(hoDan);
+
+                fillTable();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        query = "INSERT INTO hodan(SoNha, SoNguoi) " +
+        "VALUES (?, ?)";
+        PreparedStatement pstm = null;
+
+        try {
+            pstm = conn.prepareStatement(query);
+
+            pstm.setInt(1, sonha1);
+            pstm.setInt(2, 0);
+
+            int row = pstm.executeUpdate();
+            if(row != 0){
+                System.out.println("Thêm thành công " + row);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        query = "INSERT INTO hodan(SoNha, SoNguoi) " +
+        "VALUES (?, ?)";
+
+        try {
+            pstm = conn.prepareStatement(query);
+
+            pstm.setInt(1, sonha1);
+            pstm.setInt(2, 0);
+
+            int row = pstm.executeUpdate();
+            if(row != 0){
+                System.out.println("Thêm thành công " + row);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        query = "SELECT * FROM hodan";
+
+        try {
+            //Tạo đối tượng Statement
+            stm = conn.createStatement();
+
+            //Thực thi truy vấn và trả về đối tượng ResultSet
+            ResultSet rs = stm.executeQuery(query);
+
+            listHoDans.clear();
+            //Duyệt kết quả trả về
+            while (rs.next()){  //Di chuyển con trỏ xuống bản ghi kế tiếp
+
+                id = rs.getInt("SoNha");
+                sotv = rs.getInt("SoNguoi");
+
+                HoDan hoDan = new HoDan();
+                hoDan.setSoNha(id);
+                hoDan.setSoTV(sotv);
+                listHoDans.add(hoDan);
+
+                fillTable();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        query = "SELECT COUNT(SoNha) AS TongSoHoDan FROM hodan";
+        try {
+            stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(query);
+            while(rs.next()){
+                int tongSoHoDan = rs.getInt("TongSoHoDan");
+                txtTongSoHoDan.setText(""+tongSoHoDan);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }//GEN-LAST:event_btnThemActionPerformed
+
+    private void btnXemChiTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemChiTietActionPerformed
+        // TODO add your handling code here:
+        ChiTietHoDan chiTietHoDan = new ChiTietHoDan(txtSoNha.getText(), txtSoTV.getText());
+        chiTietHoDan.setVisible(true);
+        chiTietHoDan.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_btnXemChiTietActionPerformed
+
+    private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
+        // TODO add your handling code here:
+        FrMain frMain = new FrMain();
+        frMain.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnHomeActionPerformed
+
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        Connection conn = null;
+         Connection conn = null;
         conn = ConnectJDBC.connect();
       String query = "SELECT * FROM hodan";
       Statement stm = null;
@@ -548,8 +524,7 @@ public class HoDanDia extends javax.swing.JDialog {
             e.printStackTrace();
         }
     }//GEN-LAST:event_formWindowOpened
-    
-    
+
     /**
      * @param args the command line arguments
      */
@@ -567,30 +542,22 @@ public class HoDanDia extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(HoDanDia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HoDan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(HoDanDia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HoDan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(HoDanDia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HoDan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(HoDanDia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HoDan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        /* Create and display the form */
+         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                HoDanDia dialog = new HoDanDia(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+                new frHoDan().setVisible(true);
             }
         });
-        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
