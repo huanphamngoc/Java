@@ -162,7 +162,9 @@ public class GuiPhanHoi extends javax.swing.JFrame {
         conn = ConnectJDBC.connect();
         int sonha = Integer.parseInt(txtSoNha.getText());
         String content = txtNoiDungKienNghi.getText();
-        
+        if(content.isEmpty()){
+            JOptionPane.showMessageDialog(this, "không được để trống");
+        }else{
         String currentTime = LocalDateTime.now()+"";
 
         String query = "INSERT INTO phanhoi(IDPhanHoi, NoiDungPhanHoi, ThoiGianTao, SoNha) " + "VALUES (null,?, ?, ?)";
@@ -182,7 +184,7 @@ public class GuiPhanHoi extends javax.swing.JFrame {
                 e.printStackTrace();
             }
         JOptionPane.showMessageDialog(this, "Gửi phản hồi thành công");
-        txtNoiDungKienNghi.setText("");
+        txtNoiDungKienNghi.setText("");}
     }//GEN-LAST:event_btnGuiKienNghiActionPerformed
 
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed

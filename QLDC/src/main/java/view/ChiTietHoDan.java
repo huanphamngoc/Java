@@ -129,8 +129,6 @@ public class ChiTietHoDan extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblPerson);
 
-        jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
         txtChiTietSoNha.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
 
         txtChiTietSoThanhVien.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
@@ -169,8 +167,6 @@ public class ChiTietHoDan extends javax.swing.JFrame {
                     .addComponent(txtChiTietSoThanhVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27))
         );
-
-        jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         btnSua.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/create_32.png"))); // NOI18N
@@ -241,7 +237,7 @@ public class ChiTietHoDan extends javax.swing.JFrame {
         jLabel5.setText("Tuổi");
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel6.setText("Năm sinh");
+        jLabel6.setText("Ngày sinh");
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel7.setText("Nghề nghiệp");

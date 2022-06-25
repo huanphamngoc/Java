@@ -26,7 +26,7 @@ public class ConnectJDBC {
         try {
             Class.forName(driverName);
             try {
-                conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3307/qldancu?useSSL=false", "root", "");
+                conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/qldancu?useSSL=false", "root", "");
             } catch (SQLException ex) {
                 // log an exception. fro example:
                 System.out.println("Failed to create the database connection."); 

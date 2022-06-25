@@ -28,6 +28,7 @@ public class GuiThongBao extends javax.swing.JFrame {
         initComponents();
         initMajor();
     }
+    
     private void initMajor(){
         String [] majors = new String[]{
             "Cho tất cả", "Nhiều người", "Một người"
@@ -170,7 +171,10 @@ public class GuiThongBao extends javax.swing.JFrame {
       Connection conn = null;
         conn = ConnectJDBC.connect();
         String content = txtContent.getText();
-        String currentTime = LocalDateTime.now()+"";
+        if(content.isEmpty()){
+            JOptionPane.showMessageDialog(this, "không được để trống");
+        }else{
+            String currentTime = LocalDateTime.now()+"";
 
         String query = "INSERT INTO thongbao(IDThongBao, NoiDungThongBao, ThoiGianGui) " + "VALUES (null,?, ?)";
         PreparedStatement pstm = null;
@@ -190,6 +194,8 @@ public class GuiThongBao extends javax.swing.JFrame {
             }
         JOptionPane.showMessageDialog(this, "Gửi thông báo thành công");
         txtContent.setText("");
+        }
+        
     }//GEN-LAST:event_btnGuiThongBaoActionPerformed
 
     /**

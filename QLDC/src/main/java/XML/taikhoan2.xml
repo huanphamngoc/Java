@@ -1,56 +1,67 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <taikhoans>
-        
+            
+    
     
     <hodan idhodan="5">
-                
+                        
+        
         
         <taikhoan>phamhoa110</taikhoan>
-                
+                        
+        
         
         <matkhau>12345</matkhau>
-                
+                        
+        
         
         <quyen>0</quyen>
-                
+                        
+    
     
     </hodan>
-        
+            
     
     
+
     
-<<<<<<< HEAD
     <hodan idhodan="7">
-                
+                        
+        
         
         <taikhoan>phamhoa110</taikhoan>
-                
+                        
+        
         
         <matkhau>0974</matkhau>
-                
+                        
+        
         
         <quyen>0</quyen>
-                
+                        
+    
     
     </hodan>
-        
-=======
+            
     
->>>>>>> c8a624a792c97f912826ef001acc49b3a05254fb
     
     <hodan idhodan="2">
-                
+                        
+        
         <taikhoan>Huan123</taikhoan>
-                
+                        
+        
         <matkhau>12345</matkhau>
-                
+                        
+        
         <quyen>1</quyen>
-            
-    </hodan>
-<<<<<<< HEAD
+                    
     
-=======
-
-
->>>>>>> c8a624a792c97f912826ef001acc49b3a05254fb
+    </hodan>
+    
+    <hodan idhodan="1">
+        <taikhoan>huanpham</taikhoan>
+        <matkhau>12345</matkhau>
+        <quyen>0</quyen>
+    </hodan>
 </taikhoans>
