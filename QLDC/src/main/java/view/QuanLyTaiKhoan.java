@@ -290,7 +290,12 @@ public class QuanLyTaiKhoan extends javax.swing.JFrame {
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         try {
+            
             // TODO add your handling code here:
+            int choice = JOptionPane.showConfirmDialog(this, "Co chac chan xoa ko?", "Noti", JOptionPane.YES_NO_OPTION);
+            if(choice == JOptionPane.NO_OPTION){
+            return;
+            }
             int hang = tblTaiKhoan.getSelectedRow();
             String str = "taikhoans/hodan[@idhodan="+tblTaiKhoan.getValueAt(hang, 3)+"]";
             XPathFactory xf = XPathFactory.newInstance();
@@ -315,6 +320,14 @@ public class QuanLyTaiKhoan extends javax.swing.JFrame {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
+        int hang = tblTaiKhoan.getSelectedRow();
+        String taikhoan = (String)tblTaiKhoan.getValueAt(hang, 0);
+        String matkhau = (String)tblTaiKhoan.getValueAt(hang, 1);
+        int quyen = Integer.parseInt((String)tblTaiKhoan.getValueAt(hang, 2).toString());
+        int sonha = Integer.parseInt((String)tblTaiKhoan.getValueAt(hang, 3).toString());
+        SuaTaiKhoan suataikhoan = new SuaTaiKhoan(taikhoan, matkhau, quyen, sonha);
+        suataikhoan.setVisible(true);
+        this.dispose();
         
     }//GEN-LAST:event_btnSuaActionPerformed
 
