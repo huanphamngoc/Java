@@ -262,7 +262,7 @@ public class frHoDan extends javax.swing.JFrame {
 
     private void initTable(){
         String[] colums = new String[]{
-            "", "Số thành viên"
+            "Số Nhà", "Số thành viên"
         };
         model.setColumnIdentifiers(colums);
         

@@ -172,7 +172,7 @@ public class XemThongBao extends javax.swing.JFrame {
                 
                 
                 ThongBao tb = new ThongBao();
-//                tb.setId(id);
+                tb.setId(id+""); 
                 tb.setNoiDungTB(noidung);
                 tb.setThoiGianGui(thoigiantao);
                 listThongBao.add(tb);

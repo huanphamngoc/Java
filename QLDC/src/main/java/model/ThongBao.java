@@ -10,10 +10,10 @@ package model;
  * @author Admin
  */
 public class ThongBao {
-    private int id;
+    private String id;
     private String noiDungTB, thoiGianGui;
 
-    public ThongBao(int id, String noiDungTB, String thoiGianGui) {
+    public ThongBao(String id, String noiDungTB, String thoiGianGui) {
         this.id = id;
         this.noiDungTB = noiDungTB;
         this.thoiGianGui = thoiGianGui;
@@ -22,11 +22,11 @@ public class ThongBao {
     public ThongBao() {
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
