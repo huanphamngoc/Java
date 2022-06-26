@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <taikhoans>
-                                            
+                                                
+    
     
     
     
@@ -12,7 +13,8 @@
     
     
     <hodan idhodan="5">
-                                                                                        
+                                                                                                
+        
         
         
         
@@ -24,7 +26,8 @@
         
         
         <taikhoan>phamhoa110</taikhoan>
-                                                                                        
+                                                                                                
+        
         
         
         
@@ -36,7 +39,8 @@
         
         
         <matkhau>123456</matkhau>
-                                                                                        
+                                                                                                
+        
         
         
         
@@ -48,7 +52,8 @@
         
         
         <quyen>0</quyen>
-                                                                                        
+                                                                                                
+    
     
     
     
@@ -60,7 +65,7 @@
     
     
     </hodan>
-                                            
+                                                
     
     
 
@@ -73,8 +78,10 @@
     
     
     
+    
     <hodan idhodan="7">
-                                                                                        
+                                                                                                
+        
         
         
         
@@ -86,7 +93,8 @@
         
         
         <taikhoan>phamhoa11011</taikhoan>
-                                                                                        
+                                                                                                
+        
         
         
         
@@ -98,7 +106,8 @@
         
         
         <matkhau>12345</matkhau>
-                                                                                        
+                                                                                                
+        
         
         
         
@@ -110,7 +119,8 @@
         
         
         <quyen>0</quyen>
-                                                                                        
+                                                                                                
+    
     
     
     
@@ -122,7 +132,8 @@
     
     
     </hodan>
-                                            
+                                                
+    
     
     
     
@@ -134,7 +145,8 @@
     
     
     <hodan idhodan="2">
-                                                                                        
+                                                                                                
+        
         
         
         
@@ -145,7 +157,8 @@
         
         
         <taikhoan>Huan123</taikhoan>
-                                                                                        
+                                                                                                
+        
         
         
         
@@ -156,7 +169,8 @@
         
         
         <matkhau>12345</matkhau>
-                                                                                        
+                                                                                                
+        
         
         
         
@@ -167,7 +181,8 @@
         
         
         <quyen>1</quyen>
-                                                                                    
+                                                                                            
+    
     
     
     
@@ -178,7 +193,7 @@
     
     
     </hodan>
-                                    
+                                        
     
 
 
@@ -190,4 +205,10 @@
     
     
 
+
+    <hodan idhodan="3">
+        <taikhoan>huanpham132</taikhoan>
+        <matkhau>12345</matkhau>
+        <quyen>0</quyen>
+    </hodan>
 </taikhoans>

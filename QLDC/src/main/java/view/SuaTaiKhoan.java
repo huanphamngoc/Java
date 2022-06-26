@@ -210,7 +210,7 @@ public class SuaTaiKhoan extends javax.swing.JFrame {
             Ghifile();
             QuanLyTaiKhoan quanLyTaiKhoan = new QuanLyTaiKhoan();
             quanLyTaiKhoan.setVisible(true);
-//            this.dispose();
+            this.dispose();
         
         } catch (XPathExpressionException ex) {
             Logger.getLogger(SuaTaiKhoan.class.getName()).log(Level.SEVERE, null, ex);

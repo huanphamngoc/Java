@@ -153,7 +153,8 @@ public class XemThongBao extends javax.swing.JFrame {
         Connection conn = null;
         conn = ConnectJDBC.connect();
       
-       String query = "SELECT * FROM thongbao";
+       String query = "SELECT * FROM `hd_tb` inner JOIN thongbao WHERE hd_tb.IdThongBao = thongbao.IDThongBao AND SoNha = "+ Sonha;
+       System.out.println(query);
         Statement stm = null;
         try {
             //Tạo đối tượng Statement
@@ -165,13 +166,13 @@ public class XemThongBao extends javax.swing.JFrame {
             //Duyệt kết quả trả về
             while (rs.next()){  //Di chuyển con trỏ xuống bản ghi kế tiếp
                 
-                int id = rs.getInt("IDThongBao");
+                String id = rs.getString("IDThongBao");
                 String noidung = rs.getString("NoiDungThongBao");
-                String thoigiantao = rs.getString("ThoiGianGui");
+                String thoigiantao = rs.getString("ThoiGianTao");
                 
                 
                 ThongBao tb = new ThongBao();
-                tb.setId(id);
+//                tb.setId(id);
                 tb.setNoiDungTB(noidung);
                 tb.setThoiGianGui(thoigiantao);
                 listThongBao.add(tb);
